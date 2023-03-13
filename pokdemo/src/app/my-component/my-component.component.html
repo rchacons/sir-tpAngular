@@ -1,0 +1,32 @@
+<h4>Q1-Q2: Databinding using ngModel</h4>
+<input [(ngModel)]="id">
+<p>
+    {{ id }}
+</p>
+<h4>Q3: Show the id value in a readonly input</h4>
+<input value="{{id}}" readonly>
+<h4>Q3-bis: Why is difficult to do a XSS attack in an angular app</h4>
+<p>
+    Because angular automatically sanitizes any data, so any user input that is displayed
+    in the template is automatically cleaned to remove potentially malicious scrips or tags.
+</p>
+<h4>Q4-Q7: Show the Pokemon list and the trainer's choice by using ngModel</h4>
+<div>
+    <select [(ngModel)]="selectedPokemon">
+        <option value="" disabled selected>Select a Pokemon</option>
+        <option *ngFor="let pokemon of pokemonList" [ngValue]="pokemon"> {{ pokemon.name }}</option>
+    </select>
+</div> 
+<p>
+    Pokemon : {{selectedPokemon?.name}}
+</p>
+<h4>Q8-Q9: Using pipes to filter the pokemon list</h4>
+<div>
+    <input type="text" [(ngModel)]="searchText" placeholder="Search Pokemon" />
+
+    <select [(ngModel)]="selectedPokemon">
+        <option *ngFor="let pokemon of pokemonList | filterPokemonPipe : searchText : 'name'" [ngValue]="pokemon"> {{ pokemon.name }}</option>
+    </select>
+
+    <button (click)="onButtonClick(selectedPokemon)">Go !</button>
+</div>
